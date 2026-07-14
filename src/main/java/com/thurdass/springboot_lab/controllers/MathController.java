@@ -1,5 +1,6 @@
 package com.thurdass.springboot_lab.controllers;
 
+import com.thurdass.springboot_lab.exception.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public class MathController {
             @PathVariable String numberTwo) {
 
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-            throw new IllegalArgumentException("Please provide valid numeric values.");
+            throw new UnsupportedMathOperationException("Please set a valid numeric value!");
         }
 
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
