@@ -1,6 +1,8 @@
 package com.thurdass.springboot_lab.controllers;
 
 import com.thurdass.springboot_lab.exception.UnsupportedMathOperationException;
+import com.thurdass.springboot_lab.math.SimpleMath;
+import com.thurdass.springboot_lab.request.converters.NumberConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,91 +12,70 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/math")
 public class MathController {
 
-    private void validateNumbers(String... numbers) {
-        for (String number : numbers) {
-            if (!isNumeric(number)) {
-                throw new UnsupportedMathOperationException("Please set a valid numeric value!");
-            }
-        }
-    }
+    private SimpleMath math = new SimpleMath();
 
-    @GetMapping("/sum/{numberOne}/{numberTwo}")
+    // sum
+    @RequestMapping("/sum/{numberOne}/{numberTwo}")
     public Double sum(
-            @PathVariable String numberOne,
-            @PathVariable String numberTwo) {
-
-        validateNumbers(numberOne, numberTwo);
-
-        return convertToDouble(numberOne) + convertToDouble(numberTwo);
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return math.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
-    @GetMapping("/subtraction/{numberOne}/{numberTwo}")
+    // subtraction
+    @RequestMapping("/subtraction/{numberOne}/{numberTwo}")
     public Double subtraction(
-            @PathVariable String numberOne,
-            @PathVariable String numberTwo) {
-
-        validateNumbers(numberOne, numberTwo);
-
-        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return math.subtraction(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
-    @GetMapping("/multiplication/{numberOne}/{numberTwo}")
+
+    //multiplication
+    @RequestMapping("/multiplication/{numberOne}/{numberTwo}")
     public Double multiplication(
-            @PathVariable String numberOne,
-            @PathVariable String numberTwo) {
-
-        validateNumbers(numberOne, numberTwo);
-
-        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return math.multiplication(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
-    @GetMapping("/division/{numberOne}/{numberTwo}")
+   // division
+    @RequestMapping("/division/{numberOne}/{numberTwo}")
     public Double division(
-            @PathVariable String numberOne,
-            @PathVariable String numberTwo) {
-
-        validateNumbers(numberOne, numberTwo);
-
-        Double dividend = convertToDouble(numberOne);
-        Double divisor = convertToDouble(numberTwo);
-
-        if (divisor == 0) {
-            throw new UnsupportedMathOperationException("Division by zero is not allowed!");
-        }
-
-        return Math.round((dividend / divisor) * 100.0) / 100.0;
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return math.division(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
-    @GetMapping("/mean/{numberOne}/{numberTwo}")
+
+    // mean
+    @RequestMapping("/mean/{numberOne}/{numberTwo}")
     public Double mean(
-            @PathVariable String numberOne,
-            @PathVariable String numberTwo) {
-
-        validateNumbers(numberOne, numberTwo);
-
-        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return math.mean(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
-    @GetMapping("/squareRoot/{number}")
-    public Double squareRoot(
-            @PathVariable String number) {
-
-        validateNumbers(number);
-
-        Double value = convertToDouble(number);
-
-        return Math.round(Math.sqrt(value) * 100.0) / 100.0;
-    }
-
-    private Double convertToDouble(String strNumber) {
-        String number = strNumber.replace(",", ".");
-        return Double.parseDouble(number);
-    }
-
-    private boolean isNumeric(String strNumber) {
-        if (strNumber == null || strNumber.isBlank()) {
-            return false;
-        }
-
-        String number = strNumber.replace(",", ".");
-        return number.matches("[-+]?[0-9]*\\.?[0-9]+");
+    // squareRoot
+    @RequestMapping("/squareroot/{number}")
+    public Double mean(
+            @PathVariable("number") String number
+    ) throws Exception {
+        if(!NumberConverter.isNumeric(number))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return math.squareRoot(NumberConverter.convertToDouble(number));
     }
 }
