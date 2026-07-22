@@ -28,17 +28,24 @@ public class PersonServices {
         return persons;
     }
 
-    private Person mockPerson(int i) {
-    }
 
     public Person findById(String id) {
         logger.info("Finding one Person!");
 
         Person person = new Person();
         person.setId(counter.incrementAndGet());
-        person.setFirtsName("Leandro");
-        person.setLastName("Costa");
-        person.setAdress("Uberlândia - Minas Gerais - Brasil");
+        person.setFirtsName("Arthur");
+        person.setLastName("Almeida");
+        person.setAdress("Mundo Novo - Bahia - Brasil");
+        person.setGender("Male");
+        return person;
+    }
+    private Person mockPerson(int i) {
+        Person person = new Person();
+        person.setId(counter.incrementAndGet());
+        person.setFirtsName("Firstname " + i);
+        person.setLastName("Lastname " + i);
+        person.setAdress("Some Address in Brasil");
         person.setGender("Male");
         return person;
     }
