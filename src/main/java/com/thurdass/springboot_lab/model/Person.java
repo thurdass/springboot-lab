@@ -24,7 +24,6 @@ public class Person implements Serializable {
     private String adress;
     @Column(name = "gender", nullable = false, length = 6)
     private String gender;
-
     public Person() {
     }
 
