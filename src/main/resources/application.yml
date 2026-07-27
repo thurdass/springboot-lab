@@ -1,3 +1,16 @@
 spring:
   application:
     name: springboot-lab
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.driver
+    url: jdbc:mysql://localhost:3306/springboot_lab?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: ${DB_PASSWORD}
+  jpa:
+     hibernate:
+       ddl_auto: update
+     properties:
+       hibernate:
+         dialect: org.hibernate.dialect.MySQL8Dialect
+       show-sql: false
+
