@@ -1,4 +1,4 @@
-package com.thurdass.springboot_lab;
+package com.thurdass.springboot_lab.services;
 
 
 import com.thurdass.springboot_lab.model.Person;

@@ -17,8 +17,12 @@ public class Person implements Serializable {
 
     @Column(name = "firts_name", nullable = false, length = 70)
     private String firtsName;
+
+    @Column(name = "last_name", nullable = false, length = 70)
     private String lastName;
+    @Column(name = "adress", nullable = false, length = 200 )
     private String adress;
+    @Column(name = "gender", nullable = false, length = 6)
     private String gender;
 
     public Person() {

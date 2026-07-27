@@ -1,6 +1,6 @@
 package com.thurdass.springboot_lab.controllers;
 
-import com.thurdass.springboot_lab.PersonServices;
+import com.thurdass.springboot_lab.services.PersonServices;
 import com.thurdass.springboot_lab.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
