@@ -3,11 +3,19 @@ package com.thurdass.springboot_lab.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "firts_name", nullable = false, length = 70)
     private String firtsName;
     private String lastName;
     private String adress;
