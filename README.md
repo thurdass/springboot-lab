@@ -1,5 +1,9 @@
 # 🧪 Spring Boot Lab
 
+<p align="center">
+  <img width="208" height="208" alt="spring-framework" src="https://github.com/user-attachments/assets/32edacaf-06a5-442d-97e5-ba8d47715004" />
+</p>
+
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
