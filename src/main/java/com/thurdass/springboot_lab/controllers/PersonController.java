@@ -4,6 +4,7 @@ import com.thurdass.springboot_lab.services.PersonServices;
 import com.thurdass.springboot_lab.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,23 +16,19 @@ public class PersonController {
     private PersonServices service;
     // private PersonServices service = new PersonServices();
 
-    @RequestMapping(method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Person> findAll() {
         return service.findAll();
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findById(@PathVariable("id") String id) {
-        return service.findById(id);
+    public Person findById(@PathVariable("id") Long id) {
+        return service.findById(String.valueOf(id));
     }
 
-    @RequestMapping(
-            method = RequestMethod.POST,
+    @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -39,8 +36,7 @@ public class PersonController {
         return service.create(person);
     }
 
-    @RequestMapping(
-            method = RequestMethod.PUT,
+    @PutMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -48,10 +44,10 @@ public class PersonController {
         return service.update(person);
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.DELETE
-    )
-    public void delete(@PathVariable("id") String id) {
-        service.delete(id);
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        service.delete(String.valueOf(id));
+        return ResponseEntity.noContent().build();
     }
 }
