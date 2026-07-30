@@ -1,21 +1,15 @@
 package com.thurdass.springboot_lab.services;
 
-
 import com.thurdass.springboot_lab.exception.ResourceNotFoundException;
 import com.thurdass.springboot_lab.model.Person;
 import com.thurdass.springboot_lab.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 @Service
 public class PersonServices {
-
-    private final AtomicLong counter = new AtomicLong();
 
     @Autowired
     PersonRepository repository;
@@ -35,19 +29,11 @@ public class PersonServices {
     }
 
 
-    private Person mockPerson(int i) {
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirtsName("Firstname " + i);
-        person.setLastName("Lastname " + i);
-        person.setAdress("Some Address in Brasil");
-        person.setGender("Male");
-        return person;
-    }
-
     public Person create(Person person) {
-        logger.info("Creating one person!");
-        return person;
+
+        logger.info("Creating one Person!");
+
+        return repository.save(person);
     }
 
     public Person update(Person person) {
@@ -61,7 +47,7 @@ public class PersonServices {
         entity.setAdress(person.getAdress());
         entity.setGender(person.getGender());
 
-        return repository.save(person);
+        return repository.save(entity);
     }
 
     public void delete(Long id) {
