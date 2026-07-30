@@ -25,7 +25,7 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public Person findById(@PathVariable("id") Long id) {
-        return service.findById(String.valueOf(id));
+        return service.findById(id);
     }
 
     @PostMapping(
@@ -47,7 +47,7 @@ public class PersonController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        service.delete(String.valueOf(id));
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
