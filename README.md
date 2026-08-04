@@ -36,12 +36,12 @@ The current project is a REST API built with Java and Spring Boot, implementing 
 
 ## Features
 
-* CRUD operations for Person entities
-* RESTful API design
-* Layered architecture (Controller → Service → Repository)
-* Exception handling
-* JPA/Hibernate integration
-* Dependency Injection
+- ✅ CRUD operations for Person entities
+- ✅ RESTful API design
+- ✅ Layered architecture (Controller → Service → Repository)
+- ✅ Exception handling
+- ✅ JPA/Hibernate integration
+- ✅ Dependency Injection
 
 ---
 
@@ -60,8 +60,8 @@ The current project is a REST API built with Java and Spring Boot, implementing 
 ```json
 {
   "firstName": "Arthur",
-  "lastName": "da Silva Mendes de Almeida"
-  "address": "Rua A, Bahia",
+  "lastName": "da Silva Mendes de Almeida",
+  "adress": "Rua A, 123 - Bahia, Brasil",
   "gender": "Male"
 }
 ```
@@ -70,15 +70,13 @@ The current project is a REST API built with Java and Spring Boot, implementing 
 
 ```json
 {
-   "firstName": "Arthur",
-   "lastName": "da Silva Mendes de Almeida"
-   "address": "Rua A, Bahia",
-   "gender": "Male"
+  "id": 1,
+  "firstName": "Arthur",
+  "lastName": "da Silva Mendes de Almeida",
+  "adress": "Rua A, 123 - Bahia, Brasil",
+  "gender": "Male"
 }
 ```
-<div align="center">
-
-![Captura de tela de 2026-07-29 22-25-54.png](../../Imagens/Capturas%20de%20tela/Captura%20de%20tela%20de%202026-07-29%2022-25-54.png)
 ---
 
 ## Project Structure
@@ -130,17 +128,18 @@ http://localhost:8080
 
 ## Next Steps
 
-* Bean Validation
-* Spring Security + JWT
-* Swagger / OpenAPI
-* Unit Tests with JUnit
-* Docker
+- [ ] Bean Validation
+- [ ] Spring Security + JWT
+- [ ] Swagger / OpenAPI
+- [ ] Unit Tests with JUnit
+- [ ] Docker
 
 ---
 
 ## Author
 
-Arthur Almeida
+**Arthur da Silva Mendes de Almeida** - IT student
 
-* GitHub: https://github.com/thurdass
-* LinkedIn: https://linkedin.com/in/thurdas](https://www.linkedin.com/in/arthur-almeida-643a833b1/
+- 🎓 Learning backend development with Java and Spring Boot
+- 🔗 GitHub: [@thurdass](https://github.com/thurdass)
+- 💼 LinkedIn: [View Profile](https://www.linkedin.com/in/arthur-almeida-643a833b1/)

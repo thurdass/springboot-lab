@@ -15,8 +15,8 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "firts_name", nullable = false, length = 70)
-    private String firtsName;
+    @Column(name = "first_name", nullable = false, length = 70)
+    private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 70)
     private String lastName;
@@ -35,12 +35,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getFirtsName() {
-        return firtsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirtsName(String firtsName) {
-        this.firtsName = firtsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -70,11 +70,11 @@ public class Person implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Person person)) return false;
-        return getId() == person.getId() && Objects.equals(getFirtsName(), person.getFirtsName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAdress(), person.getAdress()) && Objects.equals(getGender(), person.getGender());
+        return getId() == person.getId() && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAdress(), person.getAdress()) && Objects.equals(getGender(), person.getGender());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirtsName(), getLastName(), getAdress(), getGender());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAdress(), getGender());
     }
 }
