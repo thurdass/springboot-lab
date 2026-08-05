@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 @RestController
 public class TestLogController {
 
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+    private Logger logger = Logger.getLogger(TestLogController.class.getName());
 
    @GetMapping("/test")
     public String testLog() {
