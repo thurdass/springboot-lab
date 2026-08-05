@@ -3,10 +3,11 @@ package com.thurdass.springboot_lab.services;
 import com.thurdass.springboot_lab.exception.ResourceNotFoundException;
 import com.thurdass.springboot_lab.model.Person;
 import com.thurdass.springboot_lab.repository.PersonRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class PersonServices {
@@ -14,7 +15,7 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+    private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
     public List<Person> findAll() {
         logger.info("Finding all People!");
