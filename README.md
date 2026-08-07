@@ -62,8 +62,8 @@ The current project is a REST API built with Java and Spring Boot, implementing 
 The versioned endpoints return different response contracts while keeping the
 existing endpoint available:
 
-- `GET /person/v1/{id}` keeps the legacy `adress` field.
-- `GET /person/v2/{id}` exposes the corrected `address` field and `birthDay`.
+- `GET /person/v1/{id}` returns the version 1 contract with `address`.
+- `GET /person/v2/{id}` adds the `birthDay` field to the `address` contract.
 
 The `birthDay` value in version 2 is generated for the response and is not
 stored in the database.
