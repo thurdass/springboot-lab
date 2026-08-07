@@ -1,8 +1,12 @@
 package com.thurdass.springboot_lab.dto.v2;
 
 import java.util.Date;
+import java.io.Serializable;
+import java.util.Objects;
 
-public class PersonDTOV2 {
+public class PersonDTOV2 implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String firstName;
@@ -60,5 +64,22 @@ public class PersonDTOV2 {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonDTOV2 that = (PersonDTOV2) o;
+        return Objects.equals(getId(), that.getId())
+                && Objects.equals(getFirstName(), that.getFirstName())
+                && Objects.equals(getLastName(), that.getLastName())
+                && Objects.equals(getAddress(), that.getAddress())
+                && Objects.equals(getGender(), that.getGender())
+                && Objects.equals(getBirthDay(), that.getBirthDay());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender(), getBirthDay());
     }
 }
