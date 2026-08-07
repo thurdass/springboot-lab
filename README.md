@@ -52,7 +52,7 @@ The current project is a REST API built with Java and Spring Boot, implementing 
 | GET    | `/person`      |
 | GET    | `/person/{id}` |
 | POST   | `/person`      |
-| PUT    | `/person`      |
+| PUT    | `/person/{id}` |
 | DELETE | `/person/{id}` |
 
 ### Example Request
@@ -103,13 +103,11 @@ cd springboot-lab
 
 ### Configure the database
 
-Edit the `application.properties` file:
+Configure the database through environment variables:
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/springboot_lab
-spring.datasource.username=root
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
+```bash
+export DB_USERNAME=root
+export DB_PASSWORD=your_password
 ```
 
 ### Run the application
