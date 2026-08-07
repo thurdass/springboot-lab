@@ -1,8 +1,9 @@
 package com.thurdass.springboot_lab.services;
 
-import com.thurdass.springboot_lab.exception.ResourceNotFoundException;
+import com.github.dozermapper.core.Mapper;
 import com.thurdass.springboot_lab.dto.PersonRequest;
 import com.thurdass.springboot_lab.dto.PersonResponse;
+import com.thurdass.springboot_lab.exception.ResourceNotFoundException;
 import com.thurdass.springboot_lab.model.Person;
 import com.thurdass.springboot_lab.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -15,17 +16,21 @@ import java.util.List;
 public class PersonServices {
 
     private final PersonRepository repository;
+    private final Mapper mapper;
 
     private Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
 
-    public PersonServices(PersonRepository repository) {
+    public PersonServices(PersonRepository repository, Mapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Transactional(readOnly = true)
     public List<PersonResponse> findAll() {
         logger.info("Finding all People!");
-       return repository.findAll().stream().map(this::toResponse).toList();
+       return repository.findAll().stream()
+               .map(person -> mapper.map(person, PersonResponse.class))
+               .toList();
     }
 
 
@@ -33,7 +38,7 @@ public class PersonServices {
     public PersonResponse findById(Long id) {
         logger.info("Finding one Person!");
         return repository.findById(id)
-                .map(this::toResponse)
+                .map(person -> mapper.map(person, PersonResponse.class))
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
     }
 
@@ -42,9 +47,8 @@ public class PersonServices {
 
         logger.info("Creating one Person!");
 
-        Person person = new Person();
-        copyRequestToEntity(request, person);
-        return toResponse(repository.save(person));
+        Person person = mapper.map(request, Person.class);
+        return mapper.map(repository.save(person), PersonResponse.class);
     }
 
     public PersonResponse update(Long id, PersonRequest request) {
@@ -53,9 +57,9 @@ public class PersonServices {
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
-        copyRequestToEntity(request, entity);
+        mapper.map(request, entity);
 
-        return toResponse(repository.save(entity));
+        return mapper.map(repository.save(entity), PersonResponse.class);
     }
 
     public void delete(Long id) {
@@ -67,19 +71,4 @@ public class PersonServices {
         repository.delete(entity);
     }
 
-    private void copyRequestToEntity(PersonRequest request, Person person) {
-        person.setFirstName(request.firstName());
-        person.setLastName(request.lastName());
-        person.setAdress(request.adress());
-        person.setGender(request.gender());
-    }
-
-    private PersonResponse toResponse(Person person) {
-        return new PersonResponse(
-                person.getId(),
-                person.getFirstName(),
-                person.getLastName(),
-                person.getAdress(),
-                person.getGender());
-    }
 }
