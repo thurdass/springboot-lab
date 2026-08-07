@@ -1,30 +1,33 @@
 package com.thurdass.springboot_lab.controllers;
 
+import com.thurdass.springboot_lab.dto.PersonRequest;
+import com.thurdass.springboot_lab.dto.PersonResponse;
 import com.thurdass.springboot_lab.services.PersonServices;
-import com.thurdass.springboot_lab.model.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/person")
 public class PersonController {
 
-    @Autowired
-    private PersonServices service;
-    // private PersonServices service = new PersonServices();
+    private final PersonServices service;
+
+    public PersonController(PersonServices service) {
+        this.service = service;
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll() {
+    public List<PersonResponse> findAll() {
         return service.findAll();
     }
 
     @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findById(@PathVariable("id") Long id) {
+    public PersonResponse findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
 
@@ -32,16 +35,16 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person create(@RequestBody Person person) {
-        return service.create(person);
+    public ResponseEntity<PersonResponse> create(@Valid @RequestBody PersonRequest person) {
+        return ResponseEntity.status(201).body(service.create(person));
     }
 
-    @PutMapping(
+    @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person update(@RequestBody Person person) {
-        return service.update(person);
+    public PersonResponse update(@PathVariable Long id, @Valid @RequestBody PersonRequest person) {
+        return service.update(id, person);
     }
 
 
