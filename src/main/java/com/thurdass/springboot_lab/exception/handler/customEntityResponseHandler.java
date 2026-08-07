@@ -3,7 +3,9 @@ package com.thurdass.springboot_lab.exception.handler;
 import com.thurdass.springboot_lab.exception.ExceptionResponse;
 import com.thurdass.springboot_lab.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,9 +38,12 @@ public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex,
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public final ResponseEntity<ExceptionResponse> handleValidationExceptions(
-            MethodArgumentNotValidException ex, WebRequest request) {
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request) {
         String message = ex.getBindingResult().getFieldErrors().stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .collect(Collectors.joining(", "));
@@ -47,6 +52,6 @@ public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex,
                 new Date(),
                 message,
                 request.getDescription(false));
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
     }
 }
