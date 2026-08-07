@@ -4,16 +4,16 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/springboot_lab?useTimezone=true&serverTimezone=UTC
-    username: root
+    username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
     properties:
-      hibernate:
+      format_sql: true
     show-sql: false
     open-in-view: false
 logging:
   level:
     root: WARN
-    com.thurdass.springboot_lab: DEBUG
+   # com.thurdass.springboot_lab: DEBUG
