@@ -51,9 +51,22 @@ The current project is a REST API built with Java and Spring Boot, implementing 
 | ------ | -------------- |
 | GET    | `/person`      |
 | GET    | `/person/{id}` |
+| GET    | `/person/v1/{id}` |
+| GET    | `/person/v2/{id}` |
 | POST   | `/person`      |
 | PUT    | `/person/{id}` |
 | DELETE | `/person/{id}` |
+
+### API Versioning
+
+The versioned endpoints return different response contracts while keeping the
+existing endpoint available:
+
+- `GET /person/v1/{id}` keeps the legacy `adress` field.
+- `GET /person/v2/{id}` exposes the corrected `address` field and `birthDay`.
+
+The `birthDay` value in version 2 is generated for the response and is not
+stored in the database.
 
 ### Example Request
 
