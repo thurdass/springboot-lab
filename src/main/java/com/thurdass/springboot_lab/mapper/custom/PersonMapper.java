@@ -15,7 +15,7 @@ public class PersonMapper {
         dto.setId(person.getId());
         dto.setFirstName(person.getFirstName());
         dto.setLastName(person.getLastName());
-        dto.setAdress(person.getAdress());
+        dto.setAddress(person.getAdress());
         dto.setGender(person.getGender());
         return dto;
     }
@@ -38,7 +38,7 @@ public class PersonMapper {
         }
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
-        entity.setAdress(dto.getAdress());
+        entity.setAdress(dto.getAddress());
         entity.setGender(dto.getGender());
         return entity;
     }

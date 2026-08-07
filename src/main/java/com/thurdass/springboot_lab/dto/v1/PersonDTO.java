@@ -1,11 +1,16 @@
 package com.thurdass.springboot_lab.dto.v1;
 
-public class PersonDTO {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class PersonDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String firstName;
     private String lastName;
-    private String adress;
+    private String address;
     private String gender;
 
     public PersonDTO() {
@@ -35,12 +40,12 @@ public class PersonDTO {
         this.lastName = lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getGender() {
@@ -49,5 +54,20 @@ public class PersonDTO {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof PersonDTO person)) return false;
+        return Objects.equals(getId(), person.getId())
+                && Objects.equals(getFirstName(), person.getFirstName())
+                && Objects.equals(getLastName(), person.getLastName())
+                && Objects.equals(getAddress(), person.getAddress())
+                && Objects.equals(getGender(), person.getGender());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
     }
 }
